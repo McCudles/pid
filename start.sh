@@ -1,1 +1,5 @@
-echo "this is the start script, it does nothing for now"
+echo "this is the start script"
+
+cd web && bun install
+bun start &
+cd ..
