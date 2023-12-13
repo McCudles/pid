@@ -2,6 +2,7 @@ import csv
 import glob
 import os
 import time
+import sys
 
 import RPi.GPIO as GPIO
 from simple_pid import PID
@@ -36,9 +37,12 @@ pwm_pin = 19
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(pwm_pin, GPIO.OUT)
 pwm = GPIO.PWM(pwm_pin, 100)  # 100 Hz frequency
-Kp = float(input("Kp:"))
-Ki = float(input("Ki:"))
-Kd = float(input("Kd:"))
+#Kp = float(input("Kp:"))
+Kp = float(sys.argv[1])
+#Ki = float(input("Ki:"))
+Ki = float(sys.argv[2])
+#Kd = float(input("Kd:"))
+Kd = float(sys.argv[3])
 Tsp = 60
 pid = PID(Kp, Ki, Kd, setpoint=Tsp)
 pid.output_limits = (0, 50)
@@ -54,7 +58,7 @@ try:
         T = read_temp()
         power_level = pid(T)
         pwm.ChangeDutyCycle(power_level)
-        t = time.time() - t0
+        t = round(time.time() - t0,1)
         additional_data = [[t, power_level, T, Tsp]]
         data += additional_data
         print(t, power_level, T, Tsp)
