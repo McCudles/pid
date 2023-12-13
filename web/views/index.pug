@@ -1,0 +1,12 @@
+extends layout
+
+block head
+
+block body
+  div(class=`flex`)
+    div(class=`mx-auto my-12 w-[1600px] rounded bg-ctp-base p-4`)
+      canvas(id="myChart")
+  div(hx-get="/update" hx-trigger="every 5s, load")
+
+  script(src="https://cdn.jsdelivr.net/npm/chart.js")
+  script(src="/initialChart.js")

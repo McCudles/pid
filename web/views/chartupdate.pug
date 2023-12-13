@@ -1,0 +1,5 @@
+script.
+  chart.data.labels = "#{data.time}".split(",")
+  chart.data.datasets[1].data = "#{data.power}".split(",")
+  chart.data.datasets[2].data = "#{data.temperature}".split(",")
+  chart.update()
