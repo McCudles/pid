@@ -1,9 +1,10 @@
-from simple_pid import PID
-import os
-import glob
-import time
-import RPi.GPIO as GPIO
 import csv
+import glob
+import os
+import time
+
+import RPi.GPIO as GPIO
+from simple_pid import PID
 
 os.system("modprobe w1-gpio")
 os.system("modprobe w1-therm")
@@ -42,10 +43,11 @@ Tsp = 60
 pid = PID(Kp, Ki, Kd, setpoint=Tsp)
 pid.output_limits = (0, 50)
 csv_file = f"csv/pid_Kp{Kp}_Ki{Ki}_Kd{Kd}.csv"
+temp_file = f"csv/pid_Kp{Kp}_Ki{Ki}_Kd{Kd}_TEMP.csv"
 t0 = time.time()
-data = [["Time", "Input", "Temperature", "Set Point"], [0,0,read_temp(), Tsp]]
-print("Time", "Input","Temperature", "Set Point")
-print(0,0 ,read_temp(), 0)
+data = [["Time", "Input", "Temperature", "Set Point"], [0, 0, read_temp(), Tsp]]
+print("Time", "Input", "Temperature", "Set Point")
+print(0, 0, read_temp(), 0)
 try:
     pwm.start(0)
     while True:
@@ -53,10 +55,13 @@ try:
         power_level = pid(T)
         pwm.ChangeDutyCycle(power_level)
         t = time.time() - t0
-        additional_data = [[t,power_level,T,Tsp]]
+        additional_data = [[t, power_level, T, Tsp]]
         data += additional_data
-        print(t,power_level,T,Tsp)
+        print(t, power_level, T, Tsp)
         with open(csv_file, mode="w", newline="", encoding="utf-8-sig") as file:
+            writer = csv.writer(file, quoting=csv.QUOTE_NONE)
+            writer.writerows(data)
+        with open(temp_file, mode="w", newline="", encoding="utf-8-sig") as file:
             writer = csv.writer(file, quoting=csv.QUOTE_NONE)
             writer.writerows(data)
 
