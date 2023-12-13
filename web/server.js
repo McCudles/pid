@@ -35,6 +35,9 @@ app.get("/", (_req, res) => {
 });
 
 app.get("/update", async (_req, res) => {
+  // const proc = Bun.spawn(["bash", "-c", "cat temp.csv | tail -n +2"], {
+  //   cwd: "./",
+  // });
   const proc = Bun.spawn(
     ["bash", "-c", "cat ../python/csv/temp.csv | tail -n +2"],
     {

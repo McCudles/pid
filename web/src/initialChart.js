@@ -25,7 +25,7 @@ const chart = new Chart(document.getElementById("myChart"), {
       },
       y1: {
         title: {
-          text: "Temperature (°F)",
+          text: "Temperature (°C)",
           display: true,
           color: "#f38ba8",
         },
@@ -50,6 +50,14 @@ const chart = new Chart(document.getElementById("myChart"), {
   data: {
     datasets: [
       {
+        label: "Power",
+        yAxisID: "y",
+        data: [],
+        fill: false,
+        borderColor: "rgb(166, 227, 161)",
+        backgroundColor: "rgba(166, 227, 161, 0.05)",
+      },
+      {
         label: "Temperature",
         yAxisID: "y1",
         data: [],
@@ -58,12 +66,11 @@ const chart = new Chart(document.getElementById("myChart"), {
         backgroundColor: "rgba(243, 139, 168, 0.05)",
       },
       {
-        label: "Power",
-        yAxisID: "y",
+        label: "Set Point",
+        yAxisID: "y1",
         data: [],
         fill: false,
-        borderColor: "rgb(166, 227, 161)",
-        backgroundColor: "rgba(166, 227, 161, 0.05)",
+        borderColor: "rgb(69, 71, 90)",
       },
     ],
   },
