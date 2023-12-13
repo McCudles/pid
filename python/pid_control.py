@@ -43,7 +43,7 @@ Tsp = 60
 pid = PID(Kp, Ki, Kd, setpoint=Tsp)
 pid.output_limits = (0, 50)
 csv_file = f"csv/pid_Kp{Kp}_Ki{Ki}_Kd{Kd}.csv"
-temp_file = f"csv/pid_Kp{Kp}_Ki{Ki}_Kd{Kd}_TEMP.csv"
+temp_file = f"csv/temp.csv"
 t0 = time.time()
 data = [["Time", "Input", "Temperature", "Set Point"], [0, 0, read_temp(), Tsp]]
 print("Time", "Input", "Temperature", "Set Point")
