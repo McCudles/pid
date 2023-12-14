@@ -37,11 +37,11 @@ pwm_pin = 19
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(pwm_pin, GPIO.OUT)
 pwm = GPIO.PWM(pwm_pin, 100)  # 100 Hz frequency
-#Kp = float(input("Kp:"))
+# Kp = float(input("Kp:"))
 Kp = float(sys.argv[1])
-#Ki = float(input("Ki:"))
+# Ki = float(input("Ki:"))
 Ki = float(sys.argv[2])
-#Kd = float(input("Kd:"))
+# Kd = float(input("Kd:"))
 Kd = float(sys.argv[3])
 Tsp = 60
 pid = PID(Kp, Ki, Kd, setpoint=Tsp)
@@ -55,19 +55,21 @@ print(0, 0, read_temp(), 0)
 try:
     pwm.start(0)
     while True:
-        T = read_temp()
-        power_level = pid(T)
-        pwm.ChangeDutyCycle(power_level)
-        t = round(time.time() - t0,1)
-        additional_data = [[t, power_level, T, Tsp]]
-        data += additional_data
-        print(t, power_level, T, Tsp)
-        with open(csv_file, mode="w", newline="", encoding="utf-8-sig") as file:
-            writer = csv.writer(file, quoting=csv.QUOTE_NONE)
-            writer.writerows(data)
-        with open(temp_file, mode="w", newline="", encoding="utf-8-sig") as file:
-            writer = csv.writer(file, quoting=csv.QUOTE_NONE)
-            writer.writerows(data)
+        if time.time() - t0 > 3:
+            t0 = time.time
+            T = read_temp()
+            power_level = pid(T)
+            pwm.ChangeDutyCycle(power_level)
+            t = round(time.time() - t0, 1)
+            additional_data = [[t, power_level, T, Tsp]]
+            data += additional_data
+            print(t, power_level, T, Tsp)
+            with open(csv_file, mode="w", newline="", encoding="utf-8-sig") as file:
+                writer = csv.writer(file, quoting=csv.QUOTE_NONE)
+                writer.writerows(data)
+            with open(temp_file, mode="w", newline="", encoding="utf-8-sig") as file:
+                writer = csv.writer(file, quoting=csv.QUOTE_NONE)
+                writer.writerows(data)
 
 except KeyboardInterrupt:
     with open(csv_file, mode="w", newline="", encoding="utf-8-sig") as file:
