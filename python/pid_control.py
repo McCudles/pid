@@ -56,7 +56,7 @@ try:
     pwm.start(0)
     while True:
         if time.time() - t0 > 3:
-            t0 = time.time
+            t0 = time.time()
             T = read_temp()
             power_level = pid(T)
             pwm.ChangeDutyCycle(power_level)
