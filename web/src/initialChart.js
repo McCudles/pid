@@ -42,7 +42,7 @@ const chart = new Chart(document.getElementById("myChart"), {
       },
       title: {
         display: true,
-        text: "lol gotem",
+        text: "PID Controller Lab",
         color: "#cdd6f4",
       },
     },

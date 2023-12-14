@@ -3,10 +3,14 @@ extends layout
 block head
 
 block body
+  div(class=`bg-ctp-base py-4`)
+    div(class=`container mx-auto`)
+      a(href="/csv/temp.csv") lol
   div(class=`flex`)
-    div(class=`mx-auto my-12 w-[1600px] rounded bg-ctp-base p-4`)
+    div(class=`mx-auto my-12 w-[1200px] rounded bg-ctp-base p-4`)
       canvas(id="myChart")
   div(hx-get="/update" hx-trigger="every 5s, load")
 
   script(src="https://cdn.jsdelivr.net/npm/chart.js")
   script(src="/initialChart.js")
+
