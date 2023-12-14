@@ -1,8 +1,8 @@
 import csv
 import glob
 import os
-import time
 import sys
+import time
 
 import RPi.GPIO as GPIO
 from simple_pid import PID
@@ -61,7 +61,7 @@ try:
             T = read_temp()
             power_level = pid(T)
             pwm.ChangeDutyCycle(power_level)
-            t = round(tcurrent - tstart, 1)
+            t = int(tcurrent - tstart)
             additional_data = [[t, power_level, T, Tsp]]
             data += additional_data
             print(t, power_level, T, Tsp)
