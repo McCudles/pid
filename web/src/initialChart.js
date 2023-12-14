@@ -3,12 +3,13 @@ const chart = new Chart(document.getElementById("myChart"), {
   options: {
     scales: {
       x: {
+        type: "linear",
         title: {
           text: "Time (s)",
           display: true,
           color: "#cdd6f4",
         },
-        ticks: { color: "#cdd6f4" },
+        ticks: { color: "#cdd6f4", callback: (value) => `${value}s` },
         grid: { color: "#313244" },
       },
       y: {
@@ -52,7 +53,10 @@ const chart = new Chart(document.getElementById("myChart"), {
       {
         label: "Power",
         yAxisID: "y",
-        data: [],
+        data: [
+          { x: 0.5, y: 0.5 },
+          { x: 1, y: 1 },
+        ],
         fill: false,
         borderColor: "rgb(166, 227, 161)",
         backgroundColor: "rgba(166, 227, 161, 0.05)",
