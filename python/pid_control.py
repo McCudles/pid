@@ -52,9 +52,9 @@ data = [["Time", "Input", "Temperature", "Set Point"], [0, 0, read_temp(), Tsp]]
 print("Time", "Input", "Temperature", "Set Point")
 print(0, 0, read_temp(), 0)
 tstart = time.time()
-tcurrent = time.time()
 try:
     pwm.start(0)
+    tcurrent = time.time()
     while True:
         if time.time() - tcurrent > 3:
             tcurrent = time.time()
