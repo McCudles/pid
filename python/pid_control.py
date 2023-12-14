@@ -48,19 +48,20 @@ pid = PID(Kp, Ki, Kd, setpoint=Tsp)
 pid.output_limits = (0, 50)
 csv_file = f"csv/pid_Kp{Kp}_Ki{Ki}_Kd{Kd}.csv"
 temp_file = f"csv/temp.csv"
-t0 = time.time()
 data = [["Time", "Input", "Temperature", "Set Point"], [0, 0, read_temp(), Tsp]]
 print("Time", "Input", "Temperature", "Set Point")
 print(0, 0, read_temp(), 0)
+tstart = time.time()
+tcurrent = time.time()
 try:
     pwm.start(0)
     while True:
-        if time.time() - t0 > 3:
-            t0 = time.time()
+        if time.time() - tcurrent > 3:
+            tcurrent = time.time()
             T = read_temp()
             power_level = pid(T)
             pwm.ChangeDutyCycle(power_level)
-            t = round(time.time() - t0, 1)
+            t = round(time.time() - tstart, 1)
             additional_data = [[t, power_level, T, Tsp]]
             data += additional_data
             print(t, power_level, T, Tsp)
