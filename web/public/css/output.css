@@ -2130,16 +2130,12 @@ select {
   width: 0.25rem;
 }
 
-.w-\[1600px\] {
-  width: 1600px;
+.w-\[1200px\] {
+  width: 1200px;
 }
 
 .w-full {
   width: 100%;
-}
-
-.w-\[1200px\] {
-  width: 1200px;
 }
 
 .max-w-4xl {
@@ -3181,11 +3177,6 @@ select {
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
-.bg-ctp-surface0 {
-  --tw-bg-opacity: 1;
-  background-color: rgba(var(--ctp-surface0), var(--tw-bg-opacity));
-}
-
 .decoration-slice {
   -webkit-box-decoration-break: slice;
           box-decoration-break: slice;
@@ -3324,14 +3315,14 @@ select {
   padding-bottom: 3rem;
 }
 
-.py-8 {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .pl-6 {
