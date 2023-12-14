@@ -41,6 +41,18 @@ app.get("/update", async (_req, res) => {
   const text = await new Response(proc.stdout).text();
   let data = text.split("\r\n");
   data = data.filter((value) => value !== "");
+
+  // decimate some data for performance
+  if (data.length > 100) {
+    const downsampledArray = [];
+    const factor = Math.floor(data.length / 100);
+    for (let i = 0; i < data.length; i += factor) {
+      downsampledArray.push(data[i]);
+    }
+    console.log(downsampledArray);
+    data = downsampledArray;
+  }
+
   data = data.map((value) => value.split(","));
 
   const data_time = data.map((value) => value[0]);
