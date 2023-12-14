@@ -30,6 +30,8 @@ app.use(
   }),
 ); // parse query from requests
 
+app.use("/csv", express.static("python/csv"));
+
 app.get("/", (_req, res) => {
   res.render("index");
 });
