@@ -51,17 +51,17 @@ temp_file = f"csv/temp.csv"
 data = [["Time", "Input", "Temperature", "Set Point"], [0, 0, read_temp(), Tsp]]
 print("Time", "Input", "Temperature", "Set Point")
 print(0, 0, read_temp(), 0)
-tstart = time.time()
 try:
     pwm.start(0)
     tcurrent = time.time()
+    tstart = tcurrent
     while True:
         if time.time() - tcurrent > 3:
             tcurrent = time.time()
             T = read_temp()
             power_level = pid(T)
             pwm.ChangeDutyCycle(power_level)
-            t = round(time.time() - tstart, 1)
+            t = round(tcurrent - tstart, 1)
             additional_data = [[t, power_level, T, Tsp]]
             data += additional_data
             print(t, power_level, T, Tsp)
