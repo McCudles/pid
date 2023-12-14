@@ -22,7 +22,7 @@ const chart = new Chart(document.getElementById("myChart"), {
         display: true,
         position: "left",
         ticks: { color: "#a6e3a1" },
-        grid: { color: "#313244" },
+        grid: { color: "#313244", drawOnChartArea: false },
       },
       y1: {
         title: {
@@ -33,8 +33,9 @@ const chart = new Chart(document.getElementById("myChart"), {
         type: "linear",
         display: true,
         position: "right",
+        min: 0,
         ticks: { color: "#f38ba8" },
-        grid: { color: "#313244", drawOnChartArea: false },
+        grid: { color: "#313244" },
       },
     },
     plugins: {

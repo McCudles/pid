@@ -43,13 +43,13 @@ app.get("/update", async (_req, res) => {
   data = data.filter((value) => value !== "");
 
   // decimate some data for performance
-  if (data.length > 100) {
+  const downsampleLimit = 50;
+  if (data.length > downsampleLimit) {
     const downsampledArray = [];
-    const factor = Math.floor(data.length / 100);
+    const factor = Math.floor(data.length / downsampleLimit);
     for (let i = 0; i < data.length; i += factor) {
       downsampledArray.push(data[i]);
     }
-    console.log(downsampledArray);
     data = downsampledArray;
   }
 
