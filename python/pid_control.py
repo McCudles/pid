@@ -56,7 +56,7 @@ try:
     tcurrent = time.time()
     tstart = tcurrent
     while True:
-        if time.time() - tcurrent > 1.5:
+        if time.time() - tcurrent > 3:
             tcurrent = time.time()
             T = read_temp()
             power_level = pid(T)
