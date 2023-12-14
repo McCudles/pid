@@ -10,15 +10,6 @@ app.set("view engine", "pug");
 app.use(compression());
 app.use("/css", express.static("public/css"));
 app.use("/initialChart.js", express.static("src/initialChart.js"));
-app.use(
-  "/images",
-  (_req, res, next) => {
-    //cache images for 1 hour so you're not asking for the same image every refresh
-    res.setHeader("Cache-Control", "public, max-age=3600");
-    next();
-  },
-  express.static("public/images"),
-);
 app.use(bodyParser.urlencoded({ extended: false })); // parse form post requests
 app.use(cookieParser()); // parse cookies from requests
 app.use(
@@ -41,7 +32,7 @@ app.get("/update", async (_req, res) => {
   //   cwd: "./",
   // });
   const proc = Bun.spawn(
-    ["bash", "-c", "cat ../python/csv/temp.csv | tail -n +2"],
+    ["bash", "-c", "cat python/csv/temp.csv | tail -n +2"],
     {
       cwd: "./",
     },
