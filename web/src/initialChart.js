@@ -33,7 +33,7 @@ const chart = new Chart(document.getElementById("myChart"), {
         type: "linear",
         display: true,
         position: "right",
-        min: 0,
+        // min: 0,
         ticks: { color: "#f38ba8" },
         grid: { color: "#313244" },
       },
