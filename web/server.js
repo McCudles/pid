@@ -43,7 +43,7 @@ app.get("/update", async (_req, res) => {
   data = data.filter((value) => value !== "");
 
   // decimate some data for performance
-  const downsampleLimit = 50;
+  const downsampleLimit = 100;
   if (data.length > downsampleLimit) {
     const downsampledArray = [];
     const factor = Math.floor(data.length / downsampleLimit);
