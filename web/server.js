@@ -51,14 +51,21 @@ app.get("/resetscales", (_req, res) => {
 app.get("/scales", (req, res) => {
   minX = Math.round(req.query.minX);
   maxX = Math.round(req.query.maxX);
-  console.log(minX, maxX);
   res.sendStatus(200);
 });
 
+app.get("/view/:file", async (req, res) => {
+  const file = req.params.file;
+  const proc = Bun.spawn(
+    ["bash", "-c", `cp python/csv/${file} python/csv/temp.csv`],
+    {
+      cwd: "./",
+    },
+  );
+  res.setHeader("HX-Trigger", "getchart").sendStatus(200);
+});
+
 app.get("/update", async (_req, res) => {
-  // const proc = Bun.spawn(["bash", "-c", "cat temp.csv | tail -n +2"], {
-  //   cwd: "./",
-  // });
   const proc = Bun.spawn(
     ["bash", "-c", "cat python/csv/temp.csv | tail -n +2"],
     {

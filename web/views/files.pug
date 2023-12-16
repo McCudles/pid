@@ -1,9 +1,12 @@
-div(class=`container mx-auto`)
+div(class=`mx-auto max-w-lg`)
   div(class=`flex flex-col p-4`)
-    div(class=`px-4 py-2 font-bold`) Trials
+    div(class=`px-4 py-2 font-bold border-b border-ctp-surface0 text-lg`) Trials
     each file in files
-      div(class=`border-t border-ctp-surface0 px-4 py-2`)
+      div(class=`border-t border-ctp-surface0 px-4 py-2 flex`)
         a(href=`/csv/${file}`) #{file}
-        |
-        |
-        img(src="/img/csv.svg" class="w-5 inline opacity-20")
+        button(
+          hx-get=`/view/${file}`
+          hx-swap="none"
+          _=`on click go to #myChart smoothly`
+          class=`ml-auto`
+          ) view
