@@ -9,6 +9,7 @@ const app = express();
 app.set("view engine", "pug");
 app.use(compression());
 app.use("/css", express.static("public/css"));
+app.use("/js", express.static("public/js"));
 app.use("/initialChart.js", express.static("src/initialChart.js"));
 app.use(bodyParser.urlencoded({ extended: false })); // parse form post requests
 app.use(cookieParser()); // parse cookies from requests

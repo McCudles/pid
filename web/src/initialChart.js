@@ -47,6 +47,17 @@ const chart = new Chart(document.getElementById("myChart"), {
         text: "PID Controller Lab",
         color: "#cdd6f4",
       },
+      zoom: {
+        zoom: {
+          wheel: {
+            enabled: true,
+          },
+          pinch: {
+            enabled: true,
+          },
+          mode: "x",
+        },
+      },
     },
   },
   data: {
