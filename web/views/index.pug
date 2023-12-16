@@ -4,11 +4,7 @@ block body
   div(class=`flex flex-col w-full container mx-auto relative mt-12`)
     div(class=`w-full bg-ctp-base relative`)
       canvas(id="myChart")
-      //div(class=`p-4 text-xs absolute bottom-14 left-14 pointer-events-none bg-ctp-base/80 border border-ctp-surface0/50`)
-        //div click+drag : zoom
-        //div double click : reset zoom
-        //div shift+drag : pan
-      div(class=`absolute top-4 right-12 bg-ctp-base/80 border border-ctp-surface0/50 flex gap-1`)
+      div(class=`absolute top-4 right-12 bg-ctp-base/80 flex gap-1`)
         button(
           class=`p-2 bg-ctp-surface0 rounded`
           _=`on click js chart.zoom(0.9, "") end`
