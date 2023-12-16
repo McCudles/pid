@@ -82,15 +82,15 @@ app.get("/update", async (_req, res) => {
   // }
 
   // decimate some data for performance
-  const downsampleLimit = 100;
-  if (data.length > downsampleLimit) {
-    const downsampledArray = [];
-    const factor = Math.floor(data.length / downsampleLimit);
-    for (let i = 0; i < data.length; i += factor) {
-      downsampledArray.push(data[i]);
-    }
-    data = downsampledArray;
-  }
+  // const downsampleLimit = 100;
+  // if (data.length > downsampleLimit) {
+  //   const downsampledArray = [];
+  //   const factor = Math.floor(data.length / downsampleLimit);
+  //   for (let i = 0; i < data.length; i += factor) {
+  //     downsampledArray.push(data[i]);
+  //   }
+  //   data = downsampledArray;
+  // }
 
   data = data.map((value) => value.split(","));
 
