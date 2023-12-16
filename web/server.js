@@ -5,11 +5,15 @@ const cookieParser = require("cookie-parser");
 const { queryParser } = require("express-query-parser");
 const axios = require("axios");
 
+let minX = -1;
+let maxX = -1;
+
 const app = express();
 app.set("view engine", "pug");
 app.use(compression());
 app.use("/css", express.static("public/css"));
 app.use("/js", express.static("public/js"));
+app.use("/img", express.static("public/img"));
 app.use("/initialChart.js", express.static("src/initialChart.js"));
 app.use(bodyParser.urlencoded({ extended: false })); // parse form post requests
 app.use(cookieParser()); // parse cookies from requests
@@ -25,7 +29,30 @@ app.use(
 app.use("/csv", express.static("python/csv"));
 
 app.get("/", (_req, res) => {
+  minX = -1;
+  maxX = -1;
   res.render("index");
+});
+
+app.get("/files", async (_req, res) => {
+  const proc = Bun.spawn(["bash", "-c", "ls python/csv"], {
+    cwd: "./",
+  });
+  const text = await new Response(proc.stdout).text();
+  res.render("files", { files: text.split("\n").slice(0, -1) });
+});
+
+app.get("/resetscales", (_req, res) => {
+  minX = -1;
+  maxX = -1;
+  res.sendStatus(200);
+});
+
+app.get("/scales", (req, res) => {
+  minX = Math.round(req.query.minX);
+  maxX = Math.round(req.query.maxX);
+  console.log(minX, maxX);
+  res.sendStatus(200);
 });
 
 app.get("/update", async (_req, res) => {
@@ -42,6 +69,10 @@ app.get("/update", async (_req, res) => {
   const text = await new Response(proc.stdout).text();
   let data = text.split("\r\n");
   data = data.filter((value) => value !== "");
+
+  // if (minX != -1 && maxX != -1) {
+  //   data = data.filter((value, index) => index + 2 > minX && index - 2 < maxX);
+  // }
 
   // decimate some data for performance
   const downsampleLimit = 100;

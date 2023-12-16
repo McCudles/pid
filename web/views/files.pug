@@ -1,0 +1,9 @@
+div(class=`container mx-auto`)
+  div(class=`flex flex-col p-4`)
+    div(class=`px-4 py-2 font-bold`) Trials
+    each file in files
+      div(class=`border-t border-ctp-surface0 px-4 py-2`)
+        a(href=`/csv/${file}`) #{file}
+        |
+        |
+        img(src="/img/csv.svg" class="w-5 inline opacity-20")

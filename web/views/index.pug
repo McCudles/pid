@@ -1,18 +1,21 @@
 extends layout
 
-block head
-
 block body
-  div(class=`bg-ctp-base py-4`)
-    div(class=`container mx-auto`)
-      a(href="/csv/temp.csv") lol
-  div(class=`flex`)
-    div(class=`mx-auto my-12 w-[1200px] rounded bg-ctp-base p-4`)
+  div(class=`flex flex-col w-full container mx-auto relative mt-12`)
+    div(
+      class=`w-full bg-ctp-base relative`
+      _=`on dblclick js chart.resetZoom() end
+      on dblclick get '/resetzoom'`
+      )
       canvas(id="myChart")
-  div(hx-get="/update" hx-trigger="every 5s, load")
+      div(class=`p-4 text-xs absolute bottom-14 left-14 pointer-events-none bg-ctp-base/80 border border-ctp-surface0/50`)
+        div click+drag : zoom
+        div double click : reset zoom
+        div shift+drag : pan
+  div(hx-get=`/update` hx-trigger="every 5s, load, getchart from:body")
+  div(hx-get=`/files` hx-trigger="every 20s, load, getfiles from:body")
 
   script(src="https://cdn.jsdelivr.net/npm/chart.js")
   script(src="/initialChart.js")
   script(src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8")
   script(src="/js/chartjs-plugin-zoom.min.js")
-
