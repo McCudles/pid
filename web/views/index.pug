@@ -2,17 +2,28 @@ extends layout
 
 block body
   div(class=`flex flex-col w-full container mx-auto relative mt-12`)
-    div(
-      class=`w-full bg-ctp-base relative`
-      _=`on dblclick js chart.resetZoom() end
-      on dblclick get '/resetzoom'`
-      )
+    div(class=`w-full bg-ctp-base relative`)
       canvas(id="myChart")
-      div(class=`p-4 text-xs absolute bottom-14 left-14 pointer-events-none bg-ctp-base/80 border border-ctp-surface0/50`)
-        div click+drag : zoom
-        div double click : reset zoom
-        div shift+drag : pan
-  div(hx-get=`/update` hx-trigger="every 5s, load, getchart from:body")
+      //div(class=`p-4 text-xs absolute bottom-14 left-14 pointer-events-none bg-ctp-base/80 border border-ctp-surface0/50`)
+        //div click+drag : zoom
+        //div double click : reset zoom
+        //div shift+drag : pan
+      div(class=`absolute top-4 right-12 bg-ctp-base/80 border border-ctp-surface0/50 flex gap-1`)
+        button(
+          class=`p-2 bg-ctp-surface0 rounded`
+          _=`on click js chart.zoom(0.9, "") end`
+          )
+          img(src="/img/zoomout.svg" class=`w-5`)
+        button(
+          class=`p-2 bg-ctp-surface0 rounded`
+          _=`on click js chart.zoom(1.1, "") end`
+          )
+          img(src="/img/zoomin.svg" class=`w-5`)
+        button(
+          class=`px-4 bg-ctp-surface0 rounded`
+          _=`on click js chart.resetZoom() end`
+          ) Reset
+  div(hx-get=`/update` hx-trigger="every 2s, load, getchart from:body")
   div(hx-get=`/files` hx-trigger="every 20s, load, getfiles from:body")
 
   script(src="https://cdn.jsdelivr.net/npm/chart.js")

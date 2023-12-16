@@ -24,6 +24,8 @@ const chart = new Chart(document.getElementById("myChart"), {
         type: "linear",
         display: true,
         position: "left",
+        min: 0,
+        max: 50,
         ticks: { color: "#a6e3a1" },
         grid: { color: "#313244", drawOnChartArea: false },
       },
@@ -36,7 +38,8 @@ const chart = new Chart(document.getElementById("myChart"), {
         type: "linear",
         display: true,
         position: "right",
-        // min: 0,
+        min: 0,
+        max: 100,
         ticks: { color: "#f38ba8" },
         grid: { color: "#313244" },
       },
@@ -65,13 +68,9 @@ const chart = new Chart(document.getElementById("myChart"), {
         pan: {
           enabled: true,
           mode: "x",
-          modifierKey: "shift",
         },
         zoom: {
           pinch: {
-            enabled: true,
-          },
-          drag: {
             enabled: true,
           },
           mode: "x",
